@@ -175,10 +175,20 @@ main section:nth-of-type(2) li {
 
 main section:nth-of-type(2) input[type="email"] {
   margin-bottom: 1rem;
+  padding: 0.6rem;
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
 }
 
 main section:nth-of-type(2) button {
   margin-left: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  background: var(--accent);
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 .book {

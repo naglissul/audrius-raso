@@ -87,7 +87,7 @@ main {
 }
 
 .date {
-  font-size: 0.85rem;
+  font-size: 2rem;
   color: var(--accent);
 }
 
@@ -185,4 +185,29 @@ main section:nth-of-type(2) button {
   display: block;
   text-decoration: none;
   color: inherit;
+}
+
+@media (max-width: 768px) {
+  .books {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .books > a:nth-child(2) {
+    order: 1;
+  }
+
+  .books > a:nth-child(3) {
+    order: 2;
+  }
+
+  .books > a:nth-child(1) {
+    order: 3;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
 }

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="lt">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pirmasis sniegas</title>
+    <title>Audrius Tyliūnas - Parama</title>
     <link rel="stylesheet" href="style.css" />
     <script src="cookies.js"></script>
     <script type="module">
@@ -45,7 +45,7 @@
   </head>
   <body>
     <header>
-      <h1>Audrius Tyliūnas - Pirmasis sniegas</h1>
+      <h1>Audrius Tyliūnas</h1>
       <div class="tagline">
         <a href="https://instagram.com/audriustyliunas" target="_blank"
           >@audriustyliunas</a
@@ -54,15 +54,37 @@
         <a href="mailto:audriustyliunas@gmail.com">audriustyliunas@gmail.com</a>
       </div>
     </header>
-
     <main>
-      <section class="book">
-        <img src="image.png" width="500" />
-        <div class="title">Pirmasis sniegas</div>
-        <div class="subtitle">
-          Stebuklinga kelionė po kiek kitokį sapnų pasaulį.
-        </div>
-        <div class="date">Išleidimo data: 2025-08-01</div>
+      <section>
+        <h2>Parama</h2>
+        <p>
+          Elektroniniai leidiniai yra (bus) pasiekiami nemokamai, tačiau vis
+          tiek galite paremti, arba (vėliau) nusipirkti popierinį leidinį. Tai
+          būtų didžiulis paskatinimas man tęsti rašymą ir leidimą! Ačiū!
+        </p>
+        <p>Pasirinktą sumą perveskite į šią banko sąskaitą:</p>
+        <br />
+        <p>Naglis Šuliokas</p>
+        <p>
+          <span id="iban">LT943250092929077836</span>
+          <button
+            type="button"
+            onclick="
+              navigator.clipboard.writeText(document.getElementById('iban').textContent).then(() => {
+              const btn = this;
+              const prev = btn.textContent;
+              btn.textContent = 'Nukopijuota!';
+              setTimeout(() => { btn.textContent = prev; }, 1500);
+              });
+            "
+          >
+            Kopijuoti
+          </button>
+        </p>
+        <p>REVOLT21</p>
+        <p>Paskirtis: Dovana, paremiant knygų rašymą.</p>
+        <br />
+        <p>Pavasarį deklaruosiu pajamas kaip dovanas :)</p>
         <p><a href="index.html">← Grįžti į pradžią</a></p>
       </section>
       <section class="subscribe">
@@ -90,7 +112,6 @@
         </h3>
       </section>
     </main>
-
     <footer>© Audrius Tyliūnas / Naglis Šuliokas 2025</footer>
   </body>
 </html>

@@ -2,140 +2,195 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Oficialus Audriaus Tyliūno autorių puslapis – sužinokite apie naujausias knygas, pridėkite į norų sąrašą ir prenumeruokite naujienlaiškį."
+    />
+    <meta
+      name="keywords"
+      content="Audrius Tyliūnas, knygos, lietuvių autorius, literatūra, fantastika, el. knygos"
+    />
+    <meta name="author" content="Audrius Tyliūnas" />
+    <meta
+      property="og:title"
+      content="Audrius Tyliūnas – Oficialus Autoriaus Puslapis"
+    />
+    <meta
+      property="og:description"
+      content="Atraskite Audriaus Tyliūno kūrybą – elektroninės ir fizinės knygos, norų sąrašas, naujienlaiškis ir daugiau."
+    />
+    <meta
+      property="og:image"
+      content="https://audriustyliunas.lt/share-image.jpg"
+    />
+    <meta property="og:url" content="https://www.audriusraso.lt" />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Audrius Tyliūnas – Knygos ir Kūryba" />
+    <meta
+      name="twitter:description"
+      content="Oficialus autoriaus puslapis su informacija apie naujausias knygas."
+    />
+    <meta
+      name="twitter:image"
+      content="https://www.audriusraso.lt/share-image.jpg"
+    />
+    <link rel="canonical" href="https://www.audriusraso.lt" />
+
     <title>Audrius Tyliūnas</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
-    <script src="cookies.js"></script>
-    <script type="module">
+    <script src="cookies.js" defer></script>
+    <script type="module" defer>
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
       import {
         getFirestore,
         collection,
         addDoc,
       } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-      const firebaseConfig = {
-        apiKey: "AIzaSyCXB2h9SZQ5O0tu3WQHj7NDtyU_2EixzAQ",
-
+      const app = initializeApp({
+        apiKey: "AIzaSyCXB2h9...",
         authDomain: "audrius-raso.firebaseapp.com",
-
         projectId: "audrius-raso",
-
-        storageBucket: "audrius-raso.firebasestorage.app",
-
+        storageBucket: "audrius-raso.appspot.com",
         messagingSenderId: "721935199285",
-
         appId: "1:721935199285:web:7009ddaa6930d707eed57c",
-
         measurementId: "G-VDJN2V9E63",
-      };
-
-      const app = initializeApp(firebaseConfig);
+      });
       const db = getFirestore(app);
-
-      document
-        .getElementById("subscribe-form")
-        .addEventListener("submit", async (e) => {
-          e.preventDefault();
-          const email = document.getElementById("email").value.trim();
-          if (email) await addDoc(collection(db, "subscribers"), { email });
-          alert("Ačiū! Jūsų el. paštas pridėtas prie naujienlaiškio.");
-        });
+      document.addEventListener("DOMContentLoaded", () => {
+        document
+          .getElementById("subscribe-form")
+          .addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const email = document.getElementById("email").value.trim();
+            if (email) {
+              await addDoc(collection(db, "subscribers"), { email });
+              alert("Ačiū! Jūsų el. paštas pridėtas prie naujienlaiškio.");
+              e.target.reset();
+            }
+          });
+      });
     </script>
   </head>
   <body>
-    <header>
-      <h1>Audrius Tyliūnas</h1>
-      <div class="tagline">
-        <a href="https://instagram.com/audriustyliunas" target="_blank"
-          >@audriustyliunas</a
-        >
-        ·
-        <a href="mailto:audriustyliunas@gmail.com">audriustyliunas@gmail.com</a>
+    <header class="hero">
+      <div class="hero-text">
+        <h1>Audrius Tyliūnas</h1>
+        <p class="contact">
+          <a href="https://instagram.com/audriustyliunas" target="_blank"
+            >@audriustyliunas</a
+          >
+          ·
+          <a href="mailto:audriustyliunas@gmail.com"
+            >audriustyliunas@gmail.com</a
+          >
+        </p>
       </div>
     </header>
 
-    <main>
-      <section class="books">
-        <a href="trumpi-sapnai.html" class="book">
-          <div><img class="cover" src="image-3.png" /></div>
-          <div class="title">Trumpi sapnai</div>
-          <div class="subtitle">
-            12 galvą laužiančių trumpų istorijų apie sapnus
-          </div>
-          <div class="date">El. knygą jau galite skaityti!</div>
-          <p>Fizinis leidinys - priedas prie "Pirmojo sniego"</p>
-        </a>
-        <a href="pirmasis-sniegas.html" class="book">
-          <div><img class="cover" src="image.png" /></div>
-          <div class="title">Pirmasis sniegas</div>
-          <div class="subtitle">
+    <main class="books-section">
+      <article class="book-card">
+        <img src="image-3.png" alt="Trumpi sapnai book cover" class="cover" />
+        <div class="book-details">
+          <h2>Trumpi sapnai</h2>
+          <p class="subtitle">12 galvą laužančių trumpų istorijų apie sapnus</p>
+          <a class="status ready" href="trumpi-sapnai.html#read"
+            >El. knygą jau galite skaityti!</a
+          >
+          <p class="small">
+            Fizinis leidinys – priedas prie „Pirmojo sniego“ knygos
+          </p>
+          <a href="trumpi-sapnai.html" class="read-more-btn"
+            >📘 Skaityti daugiau</a
+          >
+        </div>
+      </article>
+
+      <article class="book-card">
+        <img src="image.png" alt="Pirmasis sniegas book cover" class="cover" />
+        <div class="book-details">
+          <h2>Pirmasis sniegas</h2>
+          <p class="subtitle">
             Stebuklinga vaiko kelionė po kiek kitokį sapnų pasaulį
-          </div>
-          <div class="date">
-            Fizinė knyga nuo <br />
-            2025-08-01
-          </div>
-          <p>Leidinys kartu su kitomis istorijomis</p>
-          <button class="wishlist-main-btn">💖 Pridėti į norų sąrašą</button>
-          <div class="date">
-            El. knyga nuo <br />
-            2025-08-11
-          </div>
-        </a>
-        <a href="kurtinanciai-tyli-naktis.html" class="book">
-          <div><img class="cover" src="image-1.png" /></div>
-          <div class="title">
+          </p>
+          <p>Fizinė knyga nuo <strong>2025‑08‑01</strong></p>
+          <a href="pirmasis-sniegas.html#wishlist" class="wishlist-btn"
+            >💖 Pridėti į norų sąrašą</a
+          >
+          <p class="small">Leidinyje rasite ir kitų istorijų</p>
+
+          <p>El. knyga nuo <strong>2025‑08‑11</strong></p>
+          <a href="pirmasis-sniegas.html" class="read-more-btn"
+            >📘 Skaityti daugiau</a
+          >
+        </div>
+      </article>
+
+      <article class="book-card">
+        <img
+          src="image-1.png"
+          alt="Kurtinančiai tyli naktis cover"
+          class="cover"
+        />
+        <div class="book-details">
+          <h2>
             Kurtinančiai tyli naktis dvipusiame name <em>arba</em> Ką
             padarysi...
-          </div>
-          <div class="subtitle">
+          </h2>
+          <p class="subtitle">
             Viena siūvyklos darbuotojo klaida pavirto siaubo istorija
-          </div>
-          <div class="date">
-            El. knyga nuo <br />
-            2025-07-18
-          </div>
-          <p>Fizinis leidinys - priedas prie "Pirmojo sniego"</p>
-        </a>
-      </section>
-      <section>
-        <h3>Visi kūriniai sukurti absoliučiai be jokio dirbtinio intelekto!</h3>
-      </section>
-      <section>
-        <h3>Taip pat, galite <a href="support.html">paremti</a>!</h3>
-      </section>
-      <section class="subscribe">
-        <h2>Sužinokite apie naujienas pirmi!</h2>
-        <ul>
-          <li>Nauja informacija apie leidinius</li>
-          <li>Naujos iliustracijos</li>
-          <li>Papildyti knygų aprašymai ir ištraukos</li>
-        </ul>
-        <h3>Gaukite naujienas el. paštu</h3>
-        <form id="subscribe-form">
-          <input
-            type="email"
-            id="email"
-            required
-            placeholder="Jūsų el. paštas"
-          />
-          <button type="submit">Gauti naujienas šiuo el. paštu</button>
-        </form>
-        <h3>
-          arba sekite mane instagrame:
-          <a href="https://instagram.com/audriustyliunas" target="_blank">
-            @audriustyliunas
-          </a>
-        </h3>
-      </section>
+          </p>
+          <p class="status">El. knyga nuo <strong>2025‑07‑18</strong></p>
+          <p class="small">
+            Fizinis leidinys – priedas prie „Pirmojo sniego“ knygos
+          </p>
+          <a href="kurtinanciai-tyli-naktis.html" class="read-more-btn"
+            >📘 Skaityti daugiau</a
+          >
+        </div>
+      </article>
     </main>
+
+    <section class="note">
+      <p>
+        <strong
+          >Visi kūriniai sukurti absoliučiai be jokio dirbtinio
+          intelekto!</strong
+        >
+      </p>
+    </section>
+
+    <section class="support">
+      <p>
+        <strong>Taip pat, galite <a href="support.html">paremti</a>!</strong>
+      </p>
+    </section>
+
+    <section class="newsletter">
+      <h2>Sužinokite apie naujienas pirmi!</h2>
+      <ul>
+        <li>Nauja informacija apie leidinius</li>
+        <li>Naujos iliustracijos</li>
+        <li>Papildyti knygų aprašymai ir ištraukos</li>
+      </ul>
+      <form id="subscribe-form">
+        <input type="email" id="email" placeholder="Jūsų el. paštas" required />
+        <button type="submit">Gauti naujienas</button>
+      </form>
+      <p>
+        arba sekite mane
+        <a href="https://instagram.com/audriustyliunas" target="_blank"
+          >@audriustyliunas</a
+        >
+      </p>
+    </section>
+
     <footer>© Audrius Tyliūnas / Naglis Šuliokas 2025</footer>
   </body>
 </html>

@@ -387,3 +387,46 @@ footer {
     width: 100%;
   }
 }
+
+.download-section {
+  text-align: center;
+  margin: 2rem;
+}
+
+.download-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.download-buttons button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  margin: 0.3rem;
+  font-size: 1rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.download-buttons button:hover {
+  background: var(--accent-bright);
+  transform: translateY(-2px);
+}
+
+.support-banner {
+  max-width: 800px;
+  background: var(--muted);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 1rem;
+  text-align: center;
+  margin: 2rem auto;
+  box-shadow: 0 4px 16px var(--shadow);
+}
+
+.support-banner.hidden {
+  display: none;
+}

@@ -47,6 +47,11 @@
         getFirestore,
         collection,
         addDoc,
+        doc,
+        setDoc,
+        updateDoc,
+        getDoc,
+        increment,
       } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
       const firebaseConfig = {
@@ -62,10 +67,67 @@
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
 
-      document.addEventListener("DOMContentLoaded", () => {
-        document
-          .getElementById("subscribe-form")
-          .addEventListener("submit", async (e) => {
+      async function ensureCounterExists() {
+        const counterRef = doc(db, "counters", "downloads");
+        const snap = await getDoc(counterRef);
+        if (!snap.exists()) {
+          await setDoc(counterRef, { total: 0 });
+        }
+      }
+
+      async function incrementDownloadCounter() {
+        const counterRef = doc(db, "counters", "downloads");
+        await updateDoc(counterRef, { total: increment(1) });
+      }
+
+      async function updateDownloadCountDisplay() {
+        const counterRef = doc(db, "counters", "downloads");
+        const snap = await getDoc(counterRef);
+        if (snap.exists()) {
+          const count = snap.data().total || 0;
+          document.getElementById(
+            "download-count"
+          ).textContent = `Atsisiuntimų: ${count}`;
+        }
+      }
+
+      async function logDownload(format) {
+        await addDoc(collection(db, "downloads"), {
+          format: format,
+          timestamp: new Date(),
+        });
+        await incrementDownloadCounter();
+        await updateDownloadCountDisplay();
+      }
+
+      function triggerDownload(filename) {
+        const link = document.createElement("a");
+        link.href = `downloads/${filename}`;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      }
+
+      document.addEventListener("DOMContentLoaded", async () => {
+        await ensureCounterExists();
+        await updateDownloadCountDisplay();
+
+        const formats = ["pdf", "epub", "mobi"];
+        formats.forEach((format) => {
+          const btn = document.getElementById(`download-${format}`);
+          if (btn) {
+            btn.addEventListener("click", async () => {
+              await logDownload(format);
+              triggerDownload(`trumpi-sapnai.${format}`);
+            });
+          }
+        });
+
+        // Newsletter form
+        const subscribeForm = document.getElementById("subscribe-form");
+        if (subscribeForm) {
+          subscribeForm.addEventListener("submit", async (e) => {
             e.preventDefault();
             const email = document.getElementById("email").value.trim();
             if (email) {
@@ -74,6 +136,7 @@
               e.target.reset();
             }
           });
+        }
       });
     </script>
   </head>
@@ -98,23 +161,32 @@
         <img src="image-3.png" alt="Trumpi sapnai" />
         <div class="book-info">
           <h2>Trumpi sapnai</h2>
-          <p class="subtitle">
-            10 galvą laužančių trumpų istorijų apie sapnus.
+          <p class="subtitle">12 galvą laužančių trumpų istorijų apie sapnus</p>
+          <p>El. knyga išleista <strong>2025‑07‑12</strong></p>
+
+          <p class="small">
+            Fizinis leidinys – priedas prie „Pirmojo sniego“ knygos
           </p>
-          <p class="date">Išleidimo data: <strong>2025-07-11</strong></p>
           <a href="index.html" class="read-more-btn">← Grįžti į pradžią</a>
         </div>
       </section>
 
       <section
         class="note"
-        style="text-align: left; max-width: 900px; margin: 3rem auto"
+        style="
+          text-align: left;
+          max-width: 900px;
+          margin: 3rem auto;
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        "
       >
         <p>
           Ką darytum, jei labai gero sapno pabaigoje turėtum galimybę jame likti
           amžinai? Kas, jei dabartinis tavo gyvenimas – tai sapnas? Kas, jei
           galėtum nugalėti košmarus, tačiau tam turėtum paaukoti dalelę
-          žmogiškumo? Į šiuos ir dar kitus klausimus atsakymus rasi šiose 10
+          žmogiškumo? Į šiuos ir dar kitus klausimus atsakymus rasi šiose 12
           trumpų istorijų.
         </p>
         <p>
@@ -131,14 +203,26 @@
           idėjoms suteikti nedidelį kūną, slemo skaitinių pavidalu.
         </p>
         <p>
-          Elektroniniu variantu bus pasiekiama jau penktadienį, 11 dieną!
-          Elektroninis variantas yra nemokamas, tačiau mielai priimčiau Jūsų
-          <a href="support.html">paramą</a>! O nuo rugpjūčio 1 d. bus galima
-          įsigyti ir popierinį leidimą, kuris bus sudėtas į vieną knygą su
-          kitais mano kūriniais.
+          Elektroninį knygos leidimą jau galite skaityti! O nuo rugpjūčio 1 d.
+          bus galima įsigyti ir popierinį leidimą, kuris bus sudėtas į vieną
+          knygą su kitais mano kūriniais. Galite pridėti į norų sąrašą
+          <a href="pirmasis-sniegas.html#wishlist">čia</a>.
         </p>
+        <div id="read"></div>
       </section>
-
+      <section class="download-section ready">
+        <h3>Atsisiųskite elektroninę knygą:</h3>
+        <div class="download-buttons">
+          <button id="download-pdf">📄 PDF</button>
+          <button id="download-epub">📘 EPUB</button>
+          <button id="download-mobi">📱 MOBI</button>
+        </div>
+        <div id="download-count"></div>
+        <div>
+          <p>Nemokama! Tačiau galite paremti :))</p>
+          <a href="support.html" class="read-more-btn">Parėmti dabar</a>
+        </div>
+      </section>
       <section class="newsletter">
         <h2>Sužinokite apie naujienas pirmi!</h2>
         <ul>

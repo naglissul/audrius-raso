@@ -3,9 +3,44 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Oficialus Audriaus Tyliūno autorių puslapis – sužinokite apie naujausias knygas, pridėkite į norų sąrašą ir prenumeruokite naujienlaiškį."
+    />
+    <meta
+      name="keywords"
+      content="Audrius Tyliūnas, knygos, lietuvių autorius, literatūra, fantastika, el. knygos"
+    />
+    <meta name="author" content="Audrius Tyliūnas" />
+    <meta
+      property="og:title"
+      content="Audrius Tyliūnas – Oficialus Autoriaus Puslapis"
+    />
+    <meta
+      property="og:description"
+      content="Atraskite Audriaus Tyliūno kūrybą – elektroninės ir fizinės knygos, norų sąrašas, naujienlaiškis ir daugiau."
+    />
+    <meta
+      property="og:image"
+      content="https://audriustyliunas.lt/share-image.jpg"
+    />
+    <meta property="og:url" content="https://www.audriusraso.lt" />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Audrius Tyliūnas – Knygos ir Kūryba" />
+    <meta
+      name="twitter:description"
+      content="Oficialus autoriaus puslapis su informacija apie naujausias knygas."
+    />
+    <meta
+      name="twitter:image"
+      content="https://www.audriusraso.lt/share-image.jpg"
+    />
+    <link rel="canonical" href="https://www.audriusraso.lt" />
     <title>Pirmasis sniegas</title>
     <link rel="stylesheet" href="style.css" />
-    <script src="cookies.js"></script>
+    <script src="cookies.js" defer></script>
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
       import {
@@ -16,63 +51,68 @@
 
       const firebaseConfig = {
         apiKey: "AIzaSyCXB2h9SZQ5O0tu3WQHj7NDtyU_2EixzAQ",
-
         authDomain: "audrius-raso.firebaseapp.com",
-
         projectId: "audrius-raso",
-
-        storageBucket: "audrius-raso.firebasestorage.app",
-
+        storageBucket: "audrius-raso.appspot.com",
         messagingSenderId: "721935199285",
-
         appId: "1:721935199285:web:7009ddaa6930d707eed57c",
-
         measurementId: "G-VDJN2V9E63",
       };
 
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
 
-      document
-        .getElementById("subscribe-form")
-        .addEventListener("submit", async (e) => {
-          e.preventDefault();
-          const email = document.getElementById("email").value.trim();
-          if (email) await addDoc(collection(db, "subscribers"), { email });
-          alert("Ačiū! Jūsų el. paštas pridėtas prie naujienlaiškio.");
-        });
+      document.addEventListener("DOMContentLoaded", () => {
+        document
+          .getElementById("subscribe-form")
+          .addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const email = document.getElementById("email").value.trim();
+            if (email) {
+              await addDoc(collection(db, "subscribers"), { email });
+              alert("Ačiū! Jūsų el. paštas pridėtas prie naujienlaiškio.");
+              e.target.reset();
+            }
+          });
+      });
     </script>
   </head>
   <body>
-    <header>
-      <h1>Audrius Tyliūnas - Pirmasis sniegas</h1>
-      <div class="tagline">
-        <a href="https://instagram.com/audriustyliunas" target="_blank"
-          >@audriustyliunas</a
-        >
-        ·
-        <a href="mailto:audriustyliunas@gmail.com">audriustyliunas@gmail.com</a>
+    <header class="hero">
+      <div class="hero-text">
+        <h1>Audrius Tyliūnas</h1>
+        <p class="contact">
+          <a href="https://instagram.com/audriustyliunas" target="_blank"
+            >@audriustyliunas</a
+          >
+          ·
+          <a href="mailto:audriustyliunas@gmail.com"
+            >audriustyliunas@gmail.com</a
+          >
+        </p>
       </div>
     </header>
 
-    <main>
-      <section class="book">
-        <img src="image.png" width="500" />
-        <div class="title">Pirmasis sniegas</div>
-        <div class="subtitle">
-          Stebuklinga kelionė po kiek kitokį sapnų pasaulį.
+    <main class="book-content">
+      <section class="book-hero">
+        <img src="image.png" alt="Pirmasis sniegas" />
+        <div class="book-info">
+          <h2>Pirmasis sniegas</h2>
+          <p class="subtitle">
+            Stebuklinga kelionė po kiek kitokį sapnų pasaulį.
+          </p>
+          <p class="date">Išleidimo data: <strong>2025-08-01</strong></p>
+          <a href="index.html" class="read-more-btn">← Grįžti į pradžią</a>
         </div>
-        <div class="date">Išleidimo data: 2025-08-01</div>
-        <p><a href="index.html">← Grįžti į pradžią</a></p>
       </section>
-      <section class="subscribe">
+
+      <section class="newsletter">
         <h2>Sužinokite apie naujienas pirmi!</h2>
         <ul>
           <li>Nauja informacija apie leidinius</li>
           <li>Naujos iliustracijos</li>
           <li>Papildyti knygų aprašymai ir ištraukos</li>
         </ul>
-        <h3>Gaukite naujienas el. paštu</h3>
         <form id="subscribe-form">
           <input
             type="email"
@@ -82,12 +122,12 @@
           />
           <button type="submit">Gauti naujienas šiuo el. paštu</button>
         </form>
-        <h3>
+        <p>
           arba sekite mane instagrame:
-          <a href="https://instagram.com/audriustyliunas" target="_blank">
-            @audriustyliunas
-          </a>
-        </h3>
+          <a href="https://instagram.com/audriustyliunas" target="_blank"
+            >@audriustyliunas</a
+          >
+        </p>
       </section>
     </main>
 

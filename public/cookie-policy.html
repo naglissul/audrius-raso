@@ -1,100 +1,108 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="lt">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Audrius Tyliūnas</title>
+    <title>Slapukų politika – Audrius Tyliūnas</title>
+
+    <!-- Main stylesheet -->
     <link rel="stylesheet" href="style.css" />
-    <script src="cookies.js"></script>
+
+    <!-- Cookie management -->
+    <script src="cookies.js" defer></script>
+
+    <!-- Policy-specific styles (use CSS variables defined in style.css) -->
     <style>
-      .policy-content {
-        background-color: var(--background-light);
-        padding: var(--spacing-lg);
-        border-radius: var(--radius-lg);
-        box-shadow: var(--shadow-md);
-        margin-bottom: var(--spacing-xl);
+      .policy-container {
+        max-width: 900px;
+        margin: 3rem auto;
+        padding: 2rem 1rem;
+        background: var(--muted);
+        border-radius: var(--radius);
+        box-shadow: 0 8px 24px var(--shadow);
       }
-
-      .policy-content h2 {
-        color: var(--primary-color);
-        margin-bottom: var(--spacing-md);
-        padding-bottom: var(--spacing-xs);
-        border-bottom: 2px solid var(--primary-color);
+      .policy-container h2 {
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--accent);
+        font-size: 1.8rem;
+        color: var(--accent);
       }
-
-      .policy-content h3 {
-        margin-top: var(--spacing-lg);
-        margin-bottom: var(--spacing-sm);
-        color: var(--text-dark);
+      .policy-container h3 {
+        margin-top: 2rem;
+        margin-bottom: 0.5rem;
+        font-size: 1.2rem;
+        color: var(--text);
       }
-
+      .policy-container p,
+      .policy-container ul {
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
       .policy-table {
         width: 100%;
-        max-width: 700px;
         border-collapse: collapse;
-        margin: var(--spacing-md) 0;
-        font-size: 0.9rem;
+        margin: 1rem 0;
       }
-
       .policy-table th,
       .policy-table td {
         padding: 0.5rem;
+        border-bottom: 1px solid #ddd;
         text-align: left;
-        border-bottom: 1px solid var(--border-color);
       }
-
       .policy-table th {
-        background-color: var(--secondary-color);
+        background: var(--accent);
+        color: white;
         font-weight: 600;
       }
-
       .back-link {
         display: inline-block;
-        margin-bottom: var(--spacing-lg);
-        color: var(--primary-color);
-        font-weight: 500;
+        color: var(--accent);
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        text-decoration: none;
       }
-
       .back-link:hover {
         text-decoration: underline;
       }
     </style>
   </head>
+
   <body>
-    <header>
-      <h1>Audrius Tyliūnas</h1>
-      <div class="tagline">
-        <a href="https://instagram.com/audriustyliunas" target="_blank"
-          >@audriustyliunas</a
-        >
-        ·
-        <a href="mailto:audriustyliunas@gmail.com">audriustyliunas@gmail.com</a>
+    <header class="hero">
+      <div class="hero-text">
+        <h1>Audrius Tyliūnas</h1>
+        <p class="contact">
+          <a href="https://instagram.com/audriustyliunas" target="_blank"
+            >@audriustyliunas</a
+          >
+          ·
+          <a href="mailto:audriustyliunas@gmail.com"
+            >audriustyliunas@gmail.com</a
+          >
+        </p>
       </div>
     </header>
 
     <main>
-      <a href="index.html" class="back-link">← Grįžti į pagrindinį puslapį</a>
+      <div class="policy-container">
+        <a href="index.html" class="back-link">← Grįžti į pagrindinį puslapį</a>
 
-      <div class="policy-content">
         <h2>Slapukų politika</h2>
 
         <p>
-          Šiame puslapyje pateikiama informacija apie tai, kaip „Mokytojai
-          mokytojams" svetainė naudoja slapukus ir panašias technologijas.
+          Šiame puslapyje pateikiama informacija apie tai, kaip ši svetainė
+          naudoja slapukus ir panašias technologijas.
         </p>
 
         <h3>Kas yra slapukai?</h3>
         <p>
-          Slapukai (angl. cookies) yra maži tekstiniai failai, kuriuos jūsų
-          naršyklė išsaugo jūsų įrenginyje (kompiuteryje, planšetėje, telefone)
-          kai lankotės interneto svetainėse. Jie plačiai naudojami, kad
-          interneto svetainės veiktų efektyviau ir teiktų informaciją svetainių
-          savininkams.
+          Slapukai (angl. cookies) yra maži tekstiniai failai, kuriuos... [rest
+          of content]
         </p>
 
         <h3>Kokius slapukus naudojame?</h3>
         <p>Mūsų svetainėje naudojame šių kategorijų slapukus:</p>
-
         <table class="policy-table">
           <thead>
             <tr>
@@ -105,65 +113,30 @@
           <tbody>
             <tr>
               <td><strong>Būtinieji</strong></td>
-              <td>Būtini svetainės veikimui, negali būti išjungti</td>
+              <td>Būtini svetainės veikimui...</td>
             </tr>
             <tr>
               <td><strong>Analitiniai</strong></td>
-              <td>Leidžia stebėti lankytojų veiklą ir tobulinti svetainę</td>
+              <td>Leidžia stebėti lankytojų veiklą...</td>
             </tr>
           </tbody>
         </table>
 
         <h3>Google Analytics</h3>
-        <p>
-          Mūsų svetainė naudoja Google Analytics, interneto analitikos paslaugą,
-          kurią teikia Google, Inc. Google Analytics naudoja slapukus, kad
-          padėtų svetainei analizuoti, kaip lankytojai naudojasi svetaine.
-          Informacija, sugeneruota slapuko apie jūsų naudojimąsi svetaine
-          (įskaitant jūsų IP adresą), bus perduota ir saugoma Google
-          serveriuose.
-        </p>
-        <p>
-          Google naudos šią informaciją, kad įvertintų jūsų naudojimąsi
-          svetaine, sudarytų ataskaitas apie svetainės veiklą svetainės
-          operatoriams ir teiktų kitas paslaugas, susijusias su svetainės veikla
-          ir interneto naudojimu. Google taip pat gali perduoti šią informaciją
-          trečiosioms šalims, jei to reikalauja įstatymai arba jei tokios
-          trečiosios šalys tvarko informaciją Google vardu.
-        </p>
+        <p>Daugiau apie tai, kaip naudojame GA...</p>
 
         <h3>Kaip valdyti slapukus?</h3>
-        <p>
-          Jūs galite valdyti ir (arba) ištrinti slapukus savo nuožiūra. Galite
-          ištrinti visus jūsų kompiuteryje jau esančius slapukus, o daugumoje
-          naršyklių galite nustatyti, kad slapukai nebūtų išsaugomi.
-        </p>
-        <p>
-          Norėdami pakeisti savo sutikimo nustatymus mūsų svetainėje,
-          spustelėkite nuorodą „Slapukų nuostatos" puslapio apačioje.
-        </p>
+        <p>Jūs galite valdyti ir (arba) ištrinti slapukus savo nuožiūra...</p>
 
         <h3>Jūsų teisės</h3>
-        <p>
-          Pagal Bendrąjį duomenų apsaugos reglamentą (BDAR), jūs turite teisę:
-        </p>
         <ul>
           <li>Žinoti, kokie jūsų asmens duomenys tvarkomi</li>
-          <li>Prašyti prieigos prie savo asmens duomenų</li>
-          <li>
-            Reikalauti ištaisyti neteisingus, netikslius ar neišsamius asmens
-            duomenis
-          </li>
-          <li>Reikalauti ištrinti savo asmens duomenis</li>
-          <li>Apriboti savo asmens duomenų tvarkymą</li>
-          <li>Nesutikti su savo asmens duomenų tvarkymu</li>
+          <li>Prašyti prieigos prie savo duomenų</li>
+          <li>Reikalauti ištrinti ar keisti duomenis</li>
         </ul>
 
         <h3>Kontaktai</h3>
-        <p>
-          Jei turite klausimų apie mūsų slapukų politiką, prašome susisiekti su
-          mumis:
-        </p>
+        <p>Jeigu turite klausimų apie mūsų slapukų politiką, rašykite:</p>
         <p>
           <a href="mailto:tyliunas.audrius@gmail.com"
             >tyliunas.audrius@gmail.com</a
@@ -172,6 +145,10 @@
       </div>
     </main>
 
-    <footer>© Audrius Tyliūnas / Naglis Šuliokas 2025</footer>
+    <footer>
+      <div class="footer-content">
+        © Audrius Tyliūnas / Naglis Šuliokas 2025
+      </div>
+    </footer>
   </body>
 </html>

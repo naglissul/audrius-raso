@@ -214,11 +214,11 @@ section {
     order: 1;
   }
 
-  .books > a:nth-child(2) {
+  .books > a:nth-child(3) {
     order: 2;
   }
 
-  .books > a:nth-child(3) {
+  .books > a:nth-child(2) {
     order: 3;
   }
 }
@@ -327,4 +327,22 @@ img {
     justify-content: center;
     width: 100%;
   }
+}
+.wishlist-main-btn {
+  margin-top: 1rem;
+  padding: 0.8rem 1.6rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+  width: 100%;
+}
+
+.wishlist-main-btn:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
 }

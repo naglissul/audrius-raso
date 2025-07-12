@@ -47,13 +47,18 @@
         getFirestore,
         collection,
         addDoc,
+        doc,
+        setDoc,
+        updateDoc,
+        getDoc,
+        increment,
       } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
       const firebaseConfig = {
         apiKey: "AIzaSyCXB2h9SZQ5O0tu3WQHj7NDtyU_2EixzAQ",
         authDomain: "audrius-raso.firebaseapp.com",
         projectId: "audrius-raso",
-        storageBucket: "audrius-raso.appspot.com",
+        storageBucket: "audrius-raso.firebaseapp.com",
         messagingSenderId: "721935199285",
         appId: "1:721935199285:web:7009ddaa6930d707eed57c",
         measurementId: "G-VDJN2V9E63",
@@ -62,19 +67,72 @@
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
 
-      document.addEventListener("DOMContentLoaded", () => {
-        document
-          .getElementById("subscribe-form")
-          .addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const email = document.getElementById("email").value.trim();
-            if (email) {
-              await addDoc(collection(db, "subscribers"), { email });
-              alert("Ačiū! Jūsų el. paštas pridėtas prie naujienlaiškio.");
-              e.target.reset();
-            }
-          });
-      });
+      async function updateWishlistCount() {
+  const wishlistCountEl = document.getElementById("wishlist-count");
+  if (!wishlistCountEl) return;
+
+  const counterRef = doc(db, "counters", "wishlist");
+
+  try {
+    const docSnap = await getDoc(counterRef);
+    if (!docSnap.exists()) {
+      await setDoc(counterRef, { total: 0 }); // create if missing
+      wishlistCountEl.textContent = "0 žmonių laukia šios knygos.";
+    } else {
+      const data = docSnap.data();
+      wishlistCountEl.textContent = `${data.total} žmonių laukia šios knygos.`;
+    }
+  } catch (err) {
+    console.error("Nepavyko gauti norų sąrašo skaičiaus:", err);
+    wishlistCountEl.textContent = "Klaida įkeliant duomenis.";
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  updateWishlistCount();
+
+  const wishlistForm = document.getElementById("wishlist-form");
+  if (wishlistForm) {
+    wishlistForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = wishlistForm.querySelector("#wishlist-email").value.trim();
+      if (!email) return;
+
+      try {
+        await addDoc(collection(db, "wishlist"), {
+          email,
+          timestamp: new Date(),
+        });
+
+        const counterRef = doc(db, "counters", "wishlist");
+        await updateDoc(counterRef, {
+          total: increment(1),
+        });
+
+        alert("Pridėta į norų sąrašą! Ačiū!");
+        wishlistForm.reset();
+        updateWishlistCount(); // refresh count after addition
+      } catch (error) {
+        console.error("Klaida:", error);
+        alert("Įvyko klaida. Bandykite dar kartą vėliau.");
+      }
+    });
+  }
+
+  const subscribeForm = document.getElementById("subscribe-form");
+  if (subscribeForm) {
+    subscribeForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = subscribeForm.querySelector("#email").value.trim();
+      if (email) {
+        await addDoc(collection(db, "subscribers"), { email });
+        alert("Ačiū! Jūsų el. paštas pridėtas prie naujienlaiškio.");
+        subscribeForm.reset();
+      }
+    });
+  }
+});
+
     </script>
   </head>
   <body>
@@ -99,12 +157,37 @@
         <div class="book-info">
           <h2>Pirmasis sniegas</h2>
           <p class="subtitle">
-            Stebuklinga kelionė po kiek kitokį sapnų pasaulį.
+            Stebuklinga vaiko kelionė po kiek kitokį sapnų pasaulį
           </p>
-          <p class="date">Išleidimo data: <strong>2025-08-01</strong></p>
+          <p>Fizinė knyga nuo <strong>2025‑08‑01</strong></p>
+          <p class="small">Leidinyje rasite ir kitų istorijų</p>
+
+          <p>El. knyga nuo <strong>2025‑08‑11</strong></p>
+
+        </div>
           <a href="index.html" class="read-more-btn">← Grįžti į pradžią</a>
         </div>
+        <div id="wishlist"></div>
       </section>
+<section class="download-section ready">
+  <h3>Pridėti į norų sąrašą</h3>
+  <p>
+    Jei svarstote įsigyti šią knygą popieriniu formatu, pateikite savo el. paštą :))
+  </p>
+  <p class="small">
+    Norų sąrašo paskirtis – laiko planavimas man spausdinant ir rišant knygas
+  </p>
+  <form id="wishlist-form">
+    <input
+      type="email"
+      id="wishlist-email"
+      required
+      placeholder="Jūsų el. paštas"
+    />
+    <button type="submit" class="submit-button">Pridėti į norų sąrašą</button>
+  </form>
+  <div id="wishlist-count"></div>
+</section>
 
       <section class="newsletter">
         <h2>Sužinokite apie naujienas pirmi!</h2>
@@ -120,7 +203,7 @@
             required
             placeholder="Jūsų el. paštas"
           />
-          <button type="submit">Gauti naujienas šiuo el. paštu</button>
+          <button type="submit" class="submit-button">Gauti naujienas šiuo el. paštu</button>
         </form>
         <p>
           arba sekite mane instagrame:

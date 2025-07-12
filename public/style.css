@@ -141,15 +141,17 @@ body {
   text-align: left;
 }
 
-.newsletter input {
+input {
   width: 260px;
   padding: 0.8rem;
   border: 1px solid #ccc;
   border-radius: var(--radius);
   margin-right: 0.5rem;
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
 }
 
-.newsletter button {
+.submit-button {
   background: var(--accent);
   color: white;
   padding: 0.8rem 1.4rem;

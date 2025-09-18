@@ -6,41 +6,6 @@
     <title>Audrius Tyliūnas – Parama</title>
     <link rel="stylesheet" href="style.css" />
     <script src="cookies.js" defer></script>
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-      import {
-        getFirestore,
-        collection,
-        addDoc,
-      } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-      const firebaseConfig = {
-        apiKey: "AIzaSyCXB2h9SZQ5O0tu3WQHj7NDtyU_2EixzAQ",
-        authDomain: "audrius-raso.firebaseapp.com",
-        projectId: "audrius-raso",
-        storageBucket: "audrius-raso.firebaseapp.com",
-        messagingSenderId: "721935199285",
-        appId: "1:721935199285:web:7009ddaa6930d707eed57c",
-        measurementId: "G-VDJN2V9E63",
-      };
-
-      const app = initializeApp(firebaseConfig);
-      const db = getFirestore(app);
-
-      document.addEventListener("DOMContentLoaded", () => {
-        document
-          .getElementById("subscribe-form")
-          .addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const email = document.getElementById("email").value.trim();
-            if (email) {
-              await addDoc(collection(db, "subscribers"), { email });
-              alert("Ačiū! Jūsų el. paštas pridėtas prie naujienlaiškio.");
-              e.target.reset();
-            }
-          });
-      });
-    </script>
   </head>
   <body>
     <header class="hero">
@@ -63,8 +28,8 @@
 
       <p style="margin-bottom: 1.5rem">
         Elektroniniai leidiniai yra pasiekiami nemokamai, tačiau vis tiek galite
-        paremti, arba nuo rugpjūčio 1 d. nusipirkti popierinį leidinį. Tai būtų
-        didžiulis paskatinimas man tęsti rašymą ir leidimą! Ačiū!
+        paremti, arba ateityje nusipirkti popierinį leidinį. Tai būtų didžiulis
+        paskatinimas man tęsti rašymą ir leidimą! Ačiū!
       </p>
 
       <div style="margin-bottom: 2rem">
@@ -101,27 +66,6 @@
         <a href="index.html" class="read-more-btn">← Grįžti į pradžią</a>
       </p>
     </main>
-
-    <section class="newsletter">
-      <h2>Sužinokite apie naujienas pirmi!</h2>
-      <ul>
-        <li>Nauja informacija apie leidinius</li>
-        <li>Naujos iliustracijos</li>
-        <li>Papildyti knygų aprašymai ir ištraukos</li>
-      </ul>
-      <form id="subscribe-form">
-        <input type="email" id="email" required placeholder="Jūsų el. paštas" />
-        <button type="submit" class="submit-button">
-          Gauti naujienas šiuo el. paštu
-        </button>
-      </form>
-      <p>
-        arba sekite mane instagrame:
-        <a href="https://instagram.com/audriustyliunas" target="_blank"
-          >@audriustyliunas</a
-        >
-      </p>
-    </section>
 
     <footer>© Audrius Tyliūnas / Naglis Šuliokas 2025</footer>
   </body>

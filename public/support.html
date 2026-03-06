@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="lt">
   <head>
     <meta charset="UTF-8" />
@@ -16,9 +16,7 @@
             >@audriustyliunas</a
           >
           ·
-          <a href="mailto:tyliunas.audrius@gmail.com"
-            >tyliunas.audrius@gmail.com</a
-          >
+          <a href="mailto:audrius@audriusraso.lt">audrius@audriusraso.lt</a>
         </p>
       </div>
     </header>
@@ -43,13 +41,17 @@
             type="button"
             style="margin-left: 0.5rem"
             onclick="
-          navigator.clipboard.writeText(document.getElementById('iban').textContent).then(() => {
-            const btn = this;
-            const prev = btn.textContent;
-            btn.textContent = 'Nukopijuota!';
-            setTimeout(() => { btn.textContent = prev; }, 1500);
-          });
-        "
+              navigator.clipboard
+                .writeText(document.getElementById('iban').textContent)
+                .then(() => {
+                  const btn = this;
+                  const prev = btn.textContent;
+                  btn.textContent = 'Nukopijuota!';
+                  setTimeout(() => {
+                    btn.textContent = prev;
+                  }, 1500);
+                })
+            "
           >
             Kopijuoti
           </button>
@@ -67,6 +69,6 @@
       </p>
     </main>
 
-    <footer>© Audrius Tyliūnas / Naglis Šuliokas 2025</footer>
+    <footer>© Audrius Tyliūnas / Naglis Šuliokas 202š</footer>
   </body>
 </html>

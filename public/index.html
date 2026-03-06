@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
       name="description"
-      content="Oficialus Audriaus Tyliūno autorių puslapis – sužinokite apie naujausias knygas, pridėkite į norų sąrašą ir prenumeruokite naujienlaiškį."
+      content="Oficialus Audriaus Tyliūno autoriaus puslapis – sužinokite apie naujausias knygas, pridėkite į norų sąrašą ir prenumeruokite naujienlaiškį."
     />
     <meta
       name="keywords"
@@ -46,37 +46,6 @@
     />
     <link rel="stylesheet" href="style.css" />
     <script src="cookies.js" defer></script>
-    <script type="module" defer>
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-      import {
-        getFirestore,
-        collection,
-        addDoc,
-      } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-      const app = initializeApp({
-        apiKey: "AIzaSyCXB2h9...",
-        authDomain: "audrius-raso.firebaseapp.com",
-        projectId: "audrius-raso",
-        storageBucket: "audrius-raso.appspot.com",
-        messagingSenderId: "721935199285",
-        appId: "1:721935199285:web:7009ddaa6930d707eed57c",
-        measurementId: "G-VDJN2V9E63",
-      });
-      const db = getFirestore(app);
-      document.addEventListener("DOMContentLoaded", () => {
-        document
-          .getElementById("subscribe-form")
-          .addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const email = document.getElementById("email").value.trim();
-            if (email) {
-              await addDoc(collection(db, "subscribers"), { email });
-              alert("Ačiū! Jūsų el. paštas pridėtas prie naujienlaiškio.");
-              e.target.reset();
-            }
-          });
-      });
-    </script>
   </head>
   <body>
     <header class="hero">
@@ -87,23 +56,12 @@
             >@audriustyliunas</a
           >
           ·
-          <a href="mailto:tyliunas.audrius@gmail.com"
-            >tyliunas.audrius@gmail.com</a
-          >
+          <a href="mailto:audrius@audriusraso.lt">audrius@audriusraso.lt</a>
         </p>
       </div>
     </header>
 
     <main>
-      <section>
-        <p>
-          English version here:
-          <a href="https://www.audriuswrites.com/"
-            >https://www.audriuswrites.com/</a
-          >
-        </p>
-      </section>
-
       <section>
         <img
           src="pirmasis-sniegas-cover.jpg"
@@ -149,6 +107,7 @@
       </section>
 
       <section class="blurb">
+        <em>Rašė Aleksandra</em>
         <h3>Pirmasis sniegas</h3>
         <p>
           Ar galėtum ramiai užmigti žinodamas, kad per toli nuklydęs sapnuose
@@ -185,15 +144,19 @@
       <section>
         <h3>Gauti el. knygą</h3>
         <p>
-          Pateikite užklausą su savo el. paštu, ten bus atsiųsta el. knyga PDF,
-          EPUB ir MOBI formatais. Lauksiu grįžtamojo ryšio šiame tinklapyje
-          apačioje, arba el. paštu :))
+          Parašykite laišką adresu
+          <a href="mailto:audrius@audriusraso.lt">audrius@audriusraso.lt</a>
+          ir gausite el. knygos versiją (PDF, EPUB, MOBI) nemokamai!
         </p>
-        <h3>Pridėti į norų sąrašą</h3>
+        <h3>Gauti fizinę knygą</h3>
         <p>
-          Pateikite savo el. paštą, taip užsirašydami į eilę sekančiam fizinės
-          knygos tiražui. Surinkus bent 50 norinčiųjų, bus išleistas antras
-          tiražas. Preliminari kaina - 15 EUR + siuntimas.
+          Pirmasis knygos tiražas pasibaigė (10 fizinių kopijų), tačiau galite
+          užsirašyti į eilę sekančiam tiražui, parašydami el. laišką adresu
+          <a href="mailto:audrius@audriusraso.lt">audrius@audriusraso.lt</a>
+          (gausite atsakymą kelinti esate eilėje). Surinkus bent 50 norinčiųjų,
+          bus išleistas antrasis tiražas (jau neberišama rankomis, bet vis dar
+          be redakcijų, nes jos ojojoj kiek kainuoja). Preliminari kaina – 15
+          EUR + siuntimas.
         </p>
       </section>
 
@@ -254,7 +217,8 @@
           popieriuje, įrišta rankomis.
         </p>
         <p>
-          2025-09-18 Pasiekiama elektroninė knygos versija (PDF, EPUB, MOBI).
+          2026-03-06 Pasiekiama elektroninė knygos versija (PDF, EPUB, MOBI),
+          renkami pirkėjai antram tiražui.
         </p>
       </section>
 
@@ -266,12 +230,10 @@
 
       <section>
         <h3>Skaitytojų atsiliepimai, apžvalgos</h3>
-        <p>...</p>
-        <div>Pateikite savo atsiliepimą čia:</div>
-        <div>(Necenzūrinės žinutės ir šlamštas bus blokuojami)</div>
+        <p><em>Netrukus...</em></p>
       </section>
     </main>
 
-    <footer>© Audrius Tyliūnas / Naglis Šuliokas 2025</footer>
+    <footer>© Audrius Tyliūnas / Naglis Šuliokas 2026</footer>
   </body>
 </html>
